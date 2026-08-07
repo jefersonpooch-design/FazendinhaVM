@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAZENDINHA (26-2/08) - Painel Dark Pink</title>
+    <style>
+        :root {
+            --bg: #050508;
+            --surface: #0f0f14;
+            --surface-hover: #1b1b24;
+            --pink-primary: #ff4fa8;
+            --pink-bright: #ff7ece;
+            --pink-dark: #b5176c;
+            --text: #ffffff;
+            --text-muted: #a1a1aa;
+            --border-pink: rgba(255, 79, 168, 0.25);
+            
+            /* Brilhos dos Pódios */
+            --glow-gold: 0 0 25px rgba(250, 204, 21, 0.6), inset 0 0 15px rgba(250, 204, 21, 0.2);
+            --glow-silver: 0 0 25px rgba(161, 161, 170, 0.5), inset 0 0 15px rgba(161, 161, 170, 0.2);
+            --glow-bronze: 0 0 25px rgba(217, 119, 6, 0.5), inset 0 0 15px rgba(217, 119, 6, 0.2);
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        body {
+            background: radial-gradient(circle at top, #1c0d18 0%, var(--bg) 80%);
+            color: var(--text);
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 1250px;
+            text-align: center;
+        }
+        
+        .elaborate-header {
+            background: none;
+            border: 2px solid var(--pink-dark);
+            box-shadow: 0 0 30px rgba(255, 79, 168, 0.15), 0 20px 40px rgba(0, 0, 0, 0.7);
+            border-radius: 24px;
+            padding: 40px 35px 35px 35px;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .elaborate-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('image_ddc13e.png');
+            background-size: cover;
+            background-position: center;
+            filter: blur(10px);
+            opacity: 0.4;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .elaborate-header * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-logo-container {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .header-clan-logo {
+            max-width: 320px;
+            height: auto;
+            filter: drop-shadow(0 0 18px rgba(255, 79, 168, 0.3));
+            transition: transform 0.3s ease;
+        }
+        .header-clan-logo:hover {
+            transform: scale(1.03);
+        }
+
+        .status-badge {
+            background-color: rgba(255, 79, 168, 0.1);
+            border: 1px solid var(--pink-primary);
+            color: var(--pink-bright);
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        .brand-zone h1 {
+            font-size: 46px;
+            font-weight: 900;
+            margin: 0;
+            background: linear-gradient(to right, #ffffff, var(--pink-bright), var(--pink-primary), #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        .brand-zone p {
+            margin: 8px 0 0 0;
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+        .badge-leader {
+            background: linear-gradient(135deg, #ef4444, #991b1b);
+            color: #ffffff;
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-weight: 800;
+            margin-left: 6px;
+            vertical-align: middle;
+            border: 1px solid #f87171;
+        }
+
+        /* PROGRESSO GLOBAL */
+        .global-progress-box {
+            background: rgba(10, 10, 15, 0.9);
+            border: 1px solid var(--border-pink);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 28px 0;
+        }
+        .progress-header-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .progress-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--pink-bright);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .progress-stats {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        .progress-stats strong {
+            color: var(--pink-primary);
+            font-size: 17px;
+        }
+        .progress-track {
+            width: 100%;
+            height: 26px;
+            background: #020203;
+            border-radius: 13px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 79, 168, 0.2);
+            position: relative;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--pink-dark) 0%, var(--pink-primary) 50%, var(--pink-bright) 100%);
+            border-radius: 13px;
+            box-shadow: 0 0 15px rgba(255, 79, 168, 0.4);
+        }
+        .progress-percentage-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+            letter-spacing: 1px;
+        }
+
+        /* METRICAS RAPIDAS */
+        .quick-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 22px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        .metric-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            align-items: center;
+            justify-content: center;
+        }
+        .metric-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .metric-value {
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        /* SEÇÃO PODIUM */
+        .podium-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+        @media (max-width: 768px) {
+            .podium-section {
+                grid-template-columns: 1fr;
+            }
+        }
+        .podium-card {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .podium-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .podium-card.gold {
+            border-color: #facc15;
+            box-shadow: var(--glow-gold);
+            background: linear-gradient(180deg, #1c1807 0%, var(--surface) 100%);
+        }
+        .podium-card.silver {
+            border-color: #a1a1aa;
+            box-shadow: var(--glow-silver);
+            background: linear-gradient(180deg, #121217 0%, var(--surface) 100%);
+        }
+        .podium-card.bronze {
+            border-color: #d97706;
+            box-shadow: var(--glow-bronze);
+            background: linear-gradient(180deg, #1a1007 0%, var(--surface) 100%);
+        }
+        
+        .podium-rank {
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+        }
+        .podium-card.gold .podium-rank { color: #facc15; }
+        .podium-card.silver .podium-rank { color: #e4e4e7; }
+        .podium-card.bronze .podium-rank { color: #fb923c; }
+
+        .podium-name {
+            font-size: 25px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .podium-score {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--pink-bright);
+        }
+        .podium-sub {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+        
+        /* TABELA DE RESULTADOS */
+        .table-container {
+            background: var(--surface);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-pink);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        th, td {
+            padding: 16px 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            text-align: center;
+            vertical-align: middle;
+        }
+        th {
+            background-color: #08080c;
+            color: var(--pink-bright);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-pink);
+        }
+        tr:hover {
+            background-color: var(--surface-hover);
+        }
+        
+        .rank-gold { background-color: rgba(250, 204, 21, 0.03); }
+        .rank-silver { background-color: rgba(161, 161, 170, 0.02); }
+        .rank-bronze { background-color: rgba(217, 119, 6, 0.02); }
+        
+        .player-name { font-weight: 700; color: #fff; }
+        .power { color: var(--pink-bright); font-weight: 700; }
+        .weekly-highlight { color: #4ade80; font-weight: 800; font-size: 15px; }
+        .target-col { color: #cbd5e1; font-weight: 600; }
+
+        .player-progress-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .player-progress-container {
+            width: 80px;
+            height: 9px;
+            background: #050508;
+            border-radius: 5px;
+            display: inline-block;
+            overflow: hidden;
+            border: 1px solid rgba(255, 79, 168, 0.15);
+        }
+        .player-progress-bar {
+            height: 100%;
+            border-radius: 5px;
+        }
+        
+        .bar-pink-bright { background: linear-gradient(90deg, var(--pink-dark), var(--pink-primary)); box-shadow: 0 0 6px rgba(255, 79, 168, 0.5); }
+        .bar-pink-muted { background: linear-gradient(90deg, #581c3f, var(--pink-dark)); }
+        .bar-red { background: linear-gradient(90deg, #991b1b, #ef4444); }
+
+        .pct-text {
+            font-size: 12px;
+            font-weight: 700;
+            color: #cbd5e1;
+            min-width: 45px;
+        }
+        
+        .status-completed {
+            color: #4ade80;
+            font-weight: 700;
+            font-size: 12px;
+            background: rgba(74, 222, 128, 0.1);
+            padding: 5px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(74, 222, 128, 0.2);
+            display: inline-block;
+        }
+        .status-pending {
+            color: var(--pink-bright);
+            font-weight: 700;
+            font-size: 12px;
+            background: rgba(255, 79, 168, 0.08);
+            padding: 5px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 79, 168, 0.2);
+            display: inline-block;
+        }
+        .status-dead {
+            color: #f43f5e;
+            font-weight: 700;
+            font-size: 12px;
+            background: rgba(244, 63, 94, 0.1);
+            padding: 5px 12px;
+            border-radius: 6px;
+            border: 1px dashed rgba(244, 63, 94, 0.3);
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    
+    <!-- CABEÇALHO -->
+    <div class="elaborate-header">
+        <div class="header-logo-container" style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+            <img src="image_ddbd7c.png" alt="Emblema Fazendinha" class="header-secondary-logo" style="max-width: 120px; height: auto; border-radius: 50%; border: 2px solid var(--pink-primary); box-shadow: 0 0 15px rgba(255, 79, 168, 0.4);" onerror="this.style.display='none'">
+            <img src="image_ddd38b.png" alt="Insígnia Clã Fazendinha" class="header-clan-logo" onerror="this.style.display='none'">
+        </div>
+
+        <div class="status-badge">● Sincronização Concluída (26-2/08)</div>
+        
+        <div class="brand-zone">
+            <h1>FAZENDINHA</h1>
+            <p>Painel Analítico de Desempenho e Metas • Edição Rosa e Preto</p>
+        </div>
+
+        <div class="global-progress-box">
+            <div class="progress-header-info">
+                <div class="progress-title">🎯 Progresso da Meta Coletiva Semanal</div>
+                <div class="progress-stats">
+                    Pontuação: <strong>63.912.380</strong> / Alvo: <strong>80.400.000</strong>
+                </div>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" style="width: 79.49%;"></div>
+                <div class="progress-percentage-label">79.5% CONCLUÍDO</div>
+            </div>
+        </div>
+        
+        <div class="quick-metrics">
+            <div class="metric-item">
+                <span class="metric-label">Pontuação Total Semanal</span>
+                <span class="metric-value" style="color:var(--pink-bright);">63.912.380</span>
+            </div>
+            <div class="metric-item">
+                <span class="metric-label">Meta Global Desejada</span>
+                <span class="metric-value" style="color:var(--text);">80.400.000</span>
+            </div>
+            <div class="metric-item">
+                <span class="metric-label">Membros Cadastrados</span>
+                <span class="metric-value" style="color:var(--pink-bright);">29 / 30</span>
+            </div>
+            <div class="metric-item">
+                <span class="metric-label">Liderança Geral</span>
+                <span class="metric-value" style="color:#ffffff;">INVIS</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÓDIO TOP 3 -->
+    <div class="podium-section">
+        <div class="podium-card silver">
+            <div class="podium-rank">🥈 2º Lugar Semanal</div>
+            <div class="podium-name">NALDO</div>
+            <div class="podium-score">3.599.396 pts</div>
+            <div class="podium-sub">Meta: 2.800.000 (128.5%)</div>
+        </div>
+        <div class="podium-card gold">
+            <div class="podium-rank">🥇 TOP 1 Semanal</div>
+            <div class="podium-name">INVIS</div>
+            <div class="podium-score">3.695.745 pts</div>
+            <div class="podium-sub">Meta: 2.800.000 (132.0%)</div>
+        </div>
+        <div class="podium-card bronze">
+            <div class="podium-rank">🥉 3º Lugar Semanal</div>
+            <div class="podium-name">HOBNOB</div>
+            <div class="podium-score">3.594.611 pts</div>
+            <div class="podium-sub">Meta: 2.800.000 (128.4%)</div>
+        </div>
+    </div>
+
+    <!-- TABELA DE RESULTADOS -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Pos</th>
+                    <th>Jogador</th>
+                    <th>Poder (%)</th>
+                    <th>Grupos</th>
+                    <th>Pontos Semanais ⬇</th>
+                    <th>Meta Indiv.</th>
+                    <th>Progresso %</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr class="rank-gold">
+                    <td><strong>1</strong></td>
+                    <td class="player-name">🥇 INVIS</td>
+                    <td class="power">3003%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">3.695.745</td>
+                    <td class="target-col">2.800.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-pink-bright" style="width: 100.0%;"></div>
+                            </div>
+                            <span class="pct-text">132.0%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-completed'>⚡ Meta Batida</span></td>
+                </tr>
+                <tr class="rank-silver">
+                    <td><strong>2</strong></td>
+                    <td class="player-name">🥈 NALDO</td>
+                    <td class="power">1686%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">3.599.396</td>
+                    <td class="target-col">2.800.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-pink-bright" style="width: 100.0%;"></div>
+                            </div>
+                            <span class="pct-text">128.5%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-completed'>⚡ Meta Batida</span></td>
+                </tr>
+                <tr class="rank-bronze">
+                    <td><strong>3</strong></td>
+                    <td class="player-name">🥉 HOBNOB</td>
+                    <td class="power">2058%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">3.594.611</td>
+                    <td class="target-col">2.800.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-pink-bright" style="width: 100.0%;"></div>
+                            </div>
+                            <span class="pct-text">128.4%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-completed'>⚡ Meta Batida</span></td>
+                </tr>
+                <tr>
+                    <td><strong>4</strong></td>
+                    <td class="player-name">MACACO ALBINO</td>
+                    <td class="power">3037%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">3.523.318</td>
+                    <td class="target-col">2.800.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-pink-bright" style="width: 100.0%;"></div>
+                            </div>
+                            <span class="pct-text">125.8%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-completed'>⚡ Meta Batida</span></td>
+                </tr>
+                <tr>
+                    <td><strong>5</strong></td>
+                    <td class="player-name">GUS</td>
+                    <td class="power">1518%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">3.331.684</td>
+                    <td class="target-col">2.800.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-pink-bright" style="width: 100.0%;"></div>
+                            </div>
+                            <span class="pct-text">119.0%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-completed'>⚡ Meta Batida</span></td>
+                </tr>
+                <tr>
+                    <td><strong>6</strong></td>
+                    <td class="player-name">OMEGAVITIN</td>
+                    <td class="power">1809%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">3.283.625</td>
+                    <td class="target-col">2.800.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-pink-bright" style="width: 100.0%;"></div>
+                            </div>
+                            <span class="pct-text">117.3%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-completed'>⚡ Meta Batida</span></td>
+                </tr>
+                <tr>
+                    <td><strong>7</strong></td>
+                    <td class="player-name">TOBYMEUDOG</td>
+                    <td class="power">1460%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">3.184.065</td>
+                    <td class="target-col">2.800.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-pink-bright" style="width: 100.0%;"></div>
+                            </div>
+                            <span class="pct-text">113.7%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-completed'>⚡ Meta Batida</span></td>
+                </tr>
+                <tr>
+                    <td><strong>8</strong></td>
+                    <td class="player-name">POSITIV</td>
+                    <td class="power">1361%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">2.974.867</td>
+                    <td class="target-col">2.800.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-pink-bright" style="width: 100.0%;"></div>
+                            </div>
+                            <span class="pct-text">106.2%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-completed'>⚡ Meta Batida</span></td>
+                </tr>
+                <tr>
+                    <td><strong>9</strong></td>
+                    <td class="player-name">NATHAN</td>
+                    <td class="power">1786%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">2.919.997</td>
+                    <td class="target-col">2.800.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-pink-bright" style="width: 100.0%;"></div>
+                            </div>
+                            <span class="pct-text">104.3%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-completed'>⚡ Meta Batida</span></td>
+                </tr>
+                <tr>
+                    <td><strong>10</strong></td>
+                    <td class="player-name">POOCH</td>
+                    <td class="power">1401%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">2.895.263</td>
+                    <td class="target-col">2.800.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-pink-bright" style="width: 100.0%;"></div>
+                            </div>
+                            <span class="pct-text">103.4%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-completed'>⚡ Meta Batida</span></td>
+                </tr>
+                <tr>
+                    <td><strong>11</strong></td>
+                    <td class="player-name">PODOMORINO</td>
+                    <td class="power">1256%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">2.836.076</td>
+                    <td class="target-col">2.800.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-pink-bright" style="width: 100.0%;"></div>
+                            </div>
+                            <span class="pct-text">101.3%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-completed'>⚡ Meta Batida</span></td>
+                </tr>
+                <tr>
+                    <td><strong>12</strong></td>
+                    <td class="player-name">RD2A</td>
+                    <td class="power">1384%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">2.807.277</td>
+                    <td class="target-col">2.800.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-pink-bright" style="width: 100.0%;"></div>
+                            </div>
+                            <span class="pct-text">100.3%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-completed'>⚡ Meta Batida</span></td>
+                </tr>
+                <tr>
+                    <td><strong>13</strong></td>
+                    <td class="player-name">OZEHGOTA</td>
+                    <td class="power">1527%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">2.787.647</td>
+                    <td class="target-col">2.800.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-pink-bright" style="width: 99.6%;"></div>
+                            </div>
+                            <span class="pct-text">99.6%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-pending'>⏳ Em Andamento</span></td>
+                </tr>
+                <tr>
+                    <td><strong>14</strong></td>
+                    <td class="player-name">NIGHTMARE</td>
+                    <td class="power">1517%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">2.701.838</td>
+                    <td class="target-col">2.800.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-pink-bright" style="width: 96.5%;"></div>
+                            </div>
+                            <span class="pct-text">96.5%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-pending'>⏳ Em Andamento</span></td>
+                </tr>
+                <tr>
+                    <td><strong>15</strong></td>
+                    <td class="player-name">FEARLESS</td>
+                    <td class="power">1407%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">2.678.780</td>
+                    <td class="target-col">2.800.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-pink-bright" style="width: 95.7%;"></div>
+                            </div>
+                            <span class="pct-text">95.7%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-pending'>⏳ Em Andamento</span></td>
+                </tr>
+                <tr>
+                    <td><strong>16</strong></td>
+                    <td class="player-name">MAGNELO</td>
+                    <td class="power">1371%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">2.645.146</td>
+                    <td class="target-col">2.800.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-pink-bright" style="width: 94.5%;"></div>
+                            </div>
+                            <span class="pct-text">94.5%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-pending'>⏳ Em Andamento</span></td>
+                </tr>
+                <tr>
+                    <td><strong>17</strong></td>
+                    <td class="player-name">BAPUPA</td>
+                    <td class="power">1434%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">2.262.830</td>
+                    <td class="target-col">2.800.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-pink-muted" style="width: 80.8%;"></div>
+                            </div>
+                            <span class="pct-text">80.8%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-pending'>⏳ Em Andamento</span></td>
+                </tr>
+                <tr>
+                    <td><strong>18</strong></td>
+                    <td class="player-name">MADX</td>
+                    <td class="power">851%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">2.162.380</td>
+                    <td class="target-col">2.600.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-pink-muted" style="width: 83.2%;"></div>
+                            </div>
+                            <span class="pct-text">83.2%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-pending'>⏳ Em Andamento</span></td>
+                </tr>
+                <tr>
+                    <td><strong>19</strong></td>
+                    <td class="player-name">RAPOSINHA</td>
+                    <td class="power">976%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">2.085.958</td>
+                    <td class="target-col">2.600.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-pink-muted" style="width: 80.2%;"></div>
+                            </div>
+                            <span class="pct-text">80.2%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-pending'>⏳ Em Andamento</span></td>
+                </tr>
+                <tr>
+                    <td><strong>20</strong></td>
+                    <td class="player-name">SRKOSTON</td>
+                    <td class="power">1172%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">1.762.644</td>
+                    <td class="target-col">2.800.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-pink-muted" style="width: 63.0%;"></div>
+                            </div>
+                            <span class="pct-text">63.0%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-pending'>⏳ Em Andamento</span></td>
+                </tr>
+                <tr>
+                    <td><strong>21</strong></td>
+                    <td class="player-name">LILBROV</td>
+                    <td class="power">1390%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">1.650.420</td>
+                    <td class="target-col">2.800.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-pink-muted" style="width: 58.9%;"></div>
+                            </div>
+                            <span class="pct-text">58.9%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-pending'>⏳ Em Andamento</span></td>
+                </tr>
+                <tr>
+                    <td><strong>22</strong></td>
+                    <td class="player-name">NCMARKIN <span class="badge-leader">Líder</span></td>
+                    <td class="power">1328%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">1.539.099</td>
+                    <td class="target-col">2.800.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-pink-muted" style="width: 55.0%;"></div>
+                            </div>
+                            <span class="pct-text">55.0%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-pending'>⏳ Em Andamento</span></td>
+                </tr>
+                <tr>
+                    <td><strong>23</strong></td>
+                    <td class="player-name">RAGNAR</td>
+                    <td class="power">1648%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">1.310.034</td>
+                    <td class="target-col">2.800.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-pink-muted" style="width: 46.8%;"></div>
+                            </div>
+                            <span class="pct-text">46.8%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-pending'>⏳ Em Andamento</span></td>
+                </tr>
+                <tr>
+                    <td><strong>24</strong></td>
+                    <td class="player-name">SALLIX</td>
+                    <td class="power">1107%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">1.009.126</td>
+                    <td class="target-col">2.800.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-red" style="width: 36.0%;"></div>
+                            </div>
+                            <span class="pct-text">36.0%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-pending'>⏳ Em Andamento</span></td>
+                </tr>
+                <tr>
+                    <td><strong>25</strong></td>
+                    <td class="player-name">TOMNUKY</td>
+                    <td class="power">888%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">670.554</td>
+                    <td class="target-col">2.600.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-red" style="width: 25.8%;"></div>
+                            </div>
+                            <span class="pct-text">25.8%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-pending'>⏳ Em Andamento</span></td>
+                </tr>
+                <tr>
+                    <td><strong>26</strong></td>
+                    <td class="player-name">LIMALUCAS</td>
+                    <td class="power">1484%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">0</td>
+                    <td class="target-col">2.800.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-red" style="width: 0.0%;"></div>
+                            </div>
+                            <span class="pct-text">0.0%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-dead'>💀 Inativo</span></td>
+                </tr>
+                <tr>
+                    <td><strong>27</strong></td>
+                    <td class="player-name">JORGEMAROMBA</td>
+                    <td class="power">1311%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">0</td>
+                    <td class="target-col">2.800.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-red" style="width: 0.0%;"></div>
+                            </div>
+                            <span class="pct-text">0.0%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-dead'>💀 Inativo</span></td>
+                </tr>
+                <tr>
+                    <td><strong>28</strong></td>
+                    <td class="player-name">SIEGHART</td>
+                    <td class="power">1024%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">0</td>
+                    <td class="target-col">2.800.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-red" style="width: 0.0%;"></div>
+                            </div>
+                            <span class="pct-text">0.0%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-dead'>💀 Inativo</span></td>
+                </tr>
+                <tr>
+                    <td><strong>29</strong></td>
+                    <td class="player-name">GUIGZ</td>
+                    <td class="power">888%</td>
+                    <td>ok</td>
+                    <td class="weekly-highlight">0</td>
+                    <td class="target-col">2.600.000</td>
+                    <td class="progress-col">
+                        <div class="player-progress-wrapper">
+                            <div class="player-progress-container">
+                                <div class="player-progress-bar bar-red" style="width: 0.0%;"></div>
+                            </div>
+                            <span class="pct-text">0.0%</span>
+                        </div>
+                    </td>
+                    <td><span class='status-dead'>💀 Inativo</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
