@@ -54,41 +54,9 @@
             overflow: hidden;
         }
 
-        .elaborate-header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('image_ddc13e.png');
-            background-size: cover;
-            background-position: center;
-            filter: blur(10px);
-            opacity: 0.4;
-            z-index: -2;
-            pointer-events: none;
-        }
-
         .elaborate-header * {
             position: relative;
             z-index: 1;
-        }
-
-        .header-logo-container {
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .header-clan-logo {
-            max-width: 320px;
-            height: auto;
-            filter: drop-shadow(0 0 18px rgba(255, 79, 168, 0.3));
-            transition: transform 0.3s ease;
-        }
-        .header-clan-logo:hover {
-            transform: scale(1.03);
         }
 
         .status-badge {
@@ -400,13 +368,8 @@
     
     <!-- CABEÇALHO -->
     <div class="elaborate-header">
-        <div class="header-logo-container" style="display: flex; align-items: center; justify-content: center; gap: 20px;">
-            <img src="image_ddbd7c.png" alt="Emblema Fazendinha" class="header-secondary-logo" style="max-width: 120px; height: auto; border-radius: 50%; border: 2px solid var(--pink-primary); box-shadow: 0 0 15px rgba(255, 79, 168, 0.4);" onerror="this.style.display='none'">
-            <img src="image_ddd38b.png" alt="Insígnia Clã Fazendinha" class="header-clan-logo" onerror="this.style.display='none'">
-        </div>
-
-        <!-- CAMPO DE SINCRONIZAÇÃO FORMATADO (DD/MM/AA 24H) -->
-        <div class="status-badge">● Sincronização Concluída (26/02/26 14:30)</div>
+        <!-- CAMPO DE SINCRONIZAÇÃO FORMATADO COM FUSO HORÁRIO DE SÃO PAULO (DD/MM/AA 24H) -->
+        <div class="status-badge">● Sincronização Concluída (07/08/26 16:51)</div>
         
         <div class="brand-zone">
             <h1>FAZENDINHA</h1>
